@@ -1,21 +1,16 @@
 import express from 'express';
-import bodyParser from 'body-parser';
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
-import { makeExecutableSchema } from 'graphql-tools';
+import { ApolloServer } from 'apollo-server-express';
 
 import typeDefs from './schemas';
 import resolvers from './resolvers';
 
-const schema = makeExecutableSchema({
-    typeDefs,
-    resolvers
-});
 const PORT = 3000;
 
 const app = express();
 
-//bodyParser is needed just for post
-app.use('graphql', bodyParser.json(), graphqlExpress({schema}));
-app.use('graphiql', graphiqlExpress({ endpointURL: '/graphql' })); //if you want GraphiQL enabled
+const server = new ApolloServer({ typeDefs, resolvers });
+server.applyMiddleware({ app });
 
-app.listen(PORT);
+app.listen(PORT, () => {
+    console.log(`🚀 Server ready at http://localhost:3000${server.graphqlPath}`)
+});
