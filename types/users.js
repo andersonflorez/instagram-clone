@@ -1,25 +1,34 @@
 import { gql } from 'apollo-server';
 
 export default gql`
-    type UserShort {
-        _id:ID!,
-        username: String!,
-        thumbnail: String
+    type Error{
+        path: String!,
+        message: String!
     }
-
     type User{
         _id: ID!
         username: String!
         password: String!
+        fullname: String!
+        email: String!
+        thumbnail: String
     }
 
     type Query{
         allUsers: [User]!
         getUser(_id: ID!): User!
+        me: User!
+    }
+
+    type Response{
+        success: Boolean!
+        token: String
+        errors: [Error]
     }
 
     type Mutation{
-        createUser(username: String!, password: String!): User
+        login(email: String!, password: String!): Response!
+        createUser(username: String!, password: String!, fullname: String!, email: String!): Response!
     }
 
 `;

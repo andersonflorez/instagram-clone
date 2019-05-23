@@ -1,24 +1,27 @@
-import React from 'react';
-
-import { graphql } from 'react-apollo';
-import gpl from 'graphql-tag';
+import React, { Fragment, Component } from 'react';
 
 import Toolbar from '../components/toolbar'
+import Dropzone from '../components/dropzone'
+import WrapperConsumer, { ActionTypes } from '../store';
 
-const query = gpl`
-    {
-        allUsers {
-            username
+
+class Home extends Component{
+    componentDidMount() {
+        const {user, dispatch } = this.props.context;
+        if(!user || !user._id){
+           dispatch({type: ActionTypes.GET_USER})
         }
+     }
+
+    render(){
+        return (
+            <Fragment>
+                <Toolbar />
+                <Dropzone/>
+            </Fragment>
+        );
     }
-`;
+}
 
-const userItem = (user,i) => <li key={i}>{user.username}</li>
-
-export default graphql(query)(
-    ({data: {allUsers=[], loading}}) => [
-            <Toolbar />,
-            <ul>
-                {allUsers.map(userItem)}
-            </ul>]
-)
+//export default graphql(query)(Home)
+export default WrapperConsumer(Home)
