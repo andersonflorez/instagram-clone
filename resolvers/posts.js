@@ -8,6 +8,7 @@ const uploadDir = '/uploads';
 mkdirp.sync("."+uploadDir);
 
 const storeFS = ({stream, filename}) => {
+
     const id = shortid.generate();
     const path = `${uploadDir}/${id}-${filename}`;
 

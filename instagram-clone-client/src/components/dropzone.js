@@ -106,19 +106,7 @@ class UploadFile extends Component{
 
       const { dispatch } = this.props.context;
       dispatch({type: ActionTypes.CREATE_POST, payload: {file, desc, effect: currentFilter}});
-
-       /*  const response = await this.props.singleUpload({
-            variables: { file }
-        });
-        const URL = response.data.singleUpload.path;
-
-        const responsePost = await this.props.createPost({
-          variables: {post: {desc, photo: URL, effect: currentFilter}}
-        });
-
-        if(responsePost.data.createPost.success){
           this.setDefaultState();
-        } */
     }
 
     render(){
