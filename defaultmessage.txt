@@ -1,0 +1,10 @@
+ID Historia:
+# Codigo de la historia
+Tipo historia: 
+# Hotfix, Bugfix, Release, Feature
+Descripción del problema
+# Problema, Tarea, Razon para el commit.
+Solucion del problema
+# Solucion o lista de cambios.
+Notas
+# Instrucciones especiales, pasos de testing, etc.
